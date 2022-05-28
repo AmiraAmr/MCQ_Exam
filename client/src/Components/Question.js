@@ -19,33 +19,30 @@ const Question = ({ question_num, questions_count, question }) => {
 
     //States
     const [ choiceAnswer, setChoiceAnswer ] = useState("")
-    const [choiceStatus, setChoiceStatus] = useState(false)
     const [linkRouting, setLinkRouting] = useState("disabled-link")
     const [buttonColor, setButtonColor] = useState("dark")
 
 
-    // Preventing the user from going back to the previuos question
+    // Preventing the user from going back to the previuos question and redirects to the main
     let navigate = useNavigate()
     window.onpopstate = () => {
         navigate("/");
       }
 
-    // Renders at the begning and when the choiceStatus changes
+    // Renders at the begning and when the user's choice changes
     useEffect(() => {
-        console.log("choiceStatus in ", choiceStatus);
-        if(choiceStatus === true) {
-            // If the choice status is true, then call the score increment action, that increases the score by 1
+
+        // If the selected choice is the right answer set its state to true
+        if(choiceAnswer === answer) {
             dispatch(increment())
-            console.log(score);
+            console.log("+1");
         }
-    },[choiceStatus])
+        console.log("Score: " + score);
 
-    useEffect(() => {
-        console.log(score);
-    }, [score])
-    
+    },[choiceAnswer])
 
-    // verifing choice; and accordingly set the button and link
+
+    // On each time the user choices an answer, set the button and link, and set the ChoiceAnswer to the user's answer
     const choice = (e) => {
 
         if(e){
@@ -59,35 +56,6 @@ const Question = ({ question_num, questions_count, question }) => {
         }
     }
 
-    const checkAnswer = () => {
-        
-        // If the selected choice is the right answer set its state to true
-        if(choiceAnswer === answer) {
-            setChoiceStatus(true)
-            console.log("Set:" + choiceStatus);
-            
-        } else {
-            setChoiceStatus(false)
-        }
-
-        console.log("Out " + choiceStatus);
-        console.log("Score: " + score);
-    }
-    
-
-    // On submitting the exam, just checking the last question's answer
-    const onSubmit = (e) => {
-        // e.preventDefault()
-        checkAnswer()
-    }
-
-
-    //on clicking next to go the next question
-    const getNext = (e) => {
-        e.preventDefault()
-
-        checkAnswer()
-    }
   return (
     <Fragment>
       <div className="question">
@@ -111,8 +79,8 @@ const Question = ({ question_num, questions_count, question }) => {
                 </ToggleButtonGroup>
             </div>
             {
-                questions_count === question_num ? <Button  variant={buttonColor}><Link to="/score" onClick={e => onSubmit(e)} className={linkRouting}>Submit exam</Link></Button> : 
-                <Button  variant={buttonColor} onClick={e => getNext(e)}><Link to={`/exam/${question_num+1}`} className={linkRouting} >Next question</Link></Button>
+                questions_count === question_num ? <Button  variant={buttonColor}><Link to="/score" className={linkRouting}>Submit exam</Link></Button> : 
+                <Button  variant={buttonColor} ><Link to={`/exam/${question_num+1}`} className={linkRouting} >Next question</Link></Button>
             }
 
             </div>

@@ -26,6 +26,7 @@ const Login = () => {
 
   const [authMsg, setAuthMsg] = useState('')
 
+  // Adding the recent entered values to the previous values according to the property(key) entered
   const dataHandler = (e) => {
     const key = e.target.id
     const value = e.target.value

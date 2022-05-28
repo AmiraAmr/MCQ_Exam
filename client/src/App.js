@@ -16,7 +16,6 @@ function App() {
       <main className="py-3">
         <Container>
           <Routes>
-
             <Route path='/login' element={<Login />} exact />
             <Route path='/exam/:question_num' element={<Exam />} />
             <Route path='/score' element={<Score />} />

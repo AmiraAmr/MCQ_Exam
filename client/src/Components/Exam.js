@@ -11,11 +11,13 @@ const Exam = () => {
   const { auth } = useSelector(state => state.user)
   console.log("Auth: " + auth);
 
+  // Get the question number from the URL and convert it to integer
   const id = useParams().question_num
   const id_int = parseInt(id, 10) - 1
 
   const questions_count = questions.length
 
+  // Checking if the user is logged in to proceed to the exam
   const authenticationCheck = () => {
     if(auth) {
       return (
@@ -30,12 +32,9 @@ const Exam = () => {
   
   return (
     <Fragment>
-      {/* {
+      {
         authenticationCheck()
-      } */}
-
-       
-        <Question key={id} questions_count={questions_count} question_num={id} question={questions[id_int]}/> 
+      } 
 
     </Fragment>
   )
