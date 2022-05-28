@@ -1,0 +1,36 @@
+
+.container{
+  height: 85vh;
+  padding-top: 12vh;
+}
+a, a:hover
+{
+  color: #FFF;
+  text-decoration: none;
+}
+a.disabled-link {
+  pointer-events: none;
+}
+
+a.login-link {
+  color: #a33;
+  text-decoration: underline;
+}
+
+.notes {
+  margin-top: 20px;
+}
+
+
+.errorMsg {
+  margin-top: 20px;
+  color: #a33
+}
+
+.choices .btn-group, .btn-group-vertical{
+  flex-direction: column;
+}
+
+.score{
+  text-align: center;
+}
